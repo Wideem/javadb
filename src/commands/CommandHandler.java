@@ -168,4 +168,16 @@ public class CommandHandler {
         session.persist(results);
         session.getTransaction().commit();
     }
+
+    public static void calcExamTakenTime(Scanner sc){
+        SessionFactory sessionFactory = SessionFactoryMaker.getFactory();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        System.out.println("Enter ID of Exam which you want to see how many times was taken: ");
+        int examId = parseInt(sc.nextLine());
+
+        Long result = session.createQuery("from ExamResult where id = :id").setParameter("id", examId).stream().count();
+        System.out.println("Exam with id " +examId + " taken " + result + " times");
+    }
 }

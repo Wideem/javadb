@@ -30,6 +30,7 @@ public class Main {
                     case "2" -> CommandHandler.takeExam(sc);
                     case "3" -> CommandHandler.fillDb();
                     case "4" -> Question.update(sc);
+                    case "5" -> CommandHandler.calcExamTakenTime(sc);
                     case "0" -> runProgram = false;
                     default -> System.out.println("Incorrect input! Try again.");
                 }
