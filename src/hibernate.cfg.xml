@@ -6,9 +6,9 @@
         <property name="hibernate.hbm2ddl.auto">create</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/SCHEMA_NAME</property> <!-- Change SCHEMA_NAME to your schema name -->
-        <property name="hibernate.connection.username">DB_USERNAME</property> <!-- Change DB_USERNAME to your username -->
-        <property name="hibernate.connection.password">DB_PASSWORD</property> <!-- Change DB_PASSWORD to your password -->
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db</property> <!-- Change SCHEMA_NAME to your schema name -->
+        <property name="hibernate.connection.username">user</property> <!-- Change DB_USERNAME to your username -->
+        <property name="hibernate.connection.password">password</property> <!-- Change DB_PASSWORD to your password -->
         <!--Turn on in order to display SQL queries-->
         <property name="show_sql">false</property>
     </session-factory>
