@@ -3,11 +3,11 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db</property> <!-- Change SCHEMA_NAME to your schema name -->
-        <property name="hibernate.connection.username">user</property> <!-- Change DB_USERNAME to your username -->
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/exams</property> <!-- Change SCHEMA_NAME to your schema name -->
+        <property name="hibernate.connection.username">root</property> <!-- Change DB_USERNAME to your username -->
         <property name="hibernate.connection.password">password</property> <!-- Change DB_PASSWORD to your password -->
         <!--Turn on in order to display SQL queries-->
         <property name="show_sql">false</property>
