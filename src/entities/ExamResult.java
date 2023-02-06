@@ -23,6 +23,17 @@ public class ExamResult {
     @Column(name = "result")
     private int result;
 
+    @Column(name = "no_questions")
+    private int noQuestions;
+
+    @Column(name = "a_selected")
+    private int aSelected;
+
+    @Column(name = "b_selected")
+    private int bSelected;
+
+    @Column(name = "c_selected")
+    private int cSelected;
 
     public ExamResult() {
     }
@@ -57,6 +68,38 @@ public class ExamResult {
 
     public void setResult(int result) {
         this.result = result;
+    }
+
+    public int getNoQuestions() {
+        return noQuestions;
+    }
+
+    public void setNoQuestions(int noQuestions) {
+        this.noQuestions = noQuestions;
+    }
+
+    public int getaSelected() {
+        return aSelected;
+    }
+
+    public void setaSelected(int aSelected) {
+        this.aSelected = aSelected;
+    }
+
+    public int getbSelected() {
+        return bSelected;
+    }
+
+    public void setbSelected(int bSelected) {
+        this.bSelected = bSelected;
+    }
+
+    public int getcSelected() {
+        return cSelected;
+    }
+
+    public void setcSelected(int cSelected) {
+        this.cSelected = cSelected;
     }
 
     @Override

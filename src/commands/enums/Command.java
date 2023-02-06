@@ -6,6 +6,11 @@ public enum Command {
     EXAM("2", "Take exam"),
     FILL("3", "Fill data(first time use)"),
     UPDATE("4", "Update question"),
+    STAT1("5", "Calculate number of times exam taken"),
+
+    STAT2("6", "Calculate avg exam score "),
+    STAT3("7", "Calculate each answer select times"),
+
 
     EXIT("0", "Exit");
 

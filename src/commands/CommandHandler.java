@@ -8,11 +8,9 @@ import entities.Question;
 import entities.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
@@ -120,6 +118,9 @@ public class CommandHandler {
         System.out.println("Enter Student name");
         String name = sc.nextLine();
         int result = 0;
+        int aSelected = 0;
+        int bSelected = 0;
+        int cSelected = 0;
 
         Student st = (Student) session.createQuery("from Student where name = :name").setParameter("name", name).uniqueResult();
 
@@ -159,10 +160,19 @@ public class CommandHandler {
             }else {
                 System.out.println("sorry you're wrong");
             }
+            switch (answer){
+                case 0 -> aSelected++;
+                case 1 -> bSelected++;
+                case 3 -> cSelected++;
+            }
 
         }
         ExamResult results = new ExamResult();
         results.setExam(e);
+        results.setNoQuestions(questions.size());
+        results.setaSelected(aSelected);
+        results.setbSelected(bSelected);
+        results.setcSelected(cSelected);
         results.setStudent(st);
         results.setResult(result);
         session.persist(results);
@@ -179,5 +189,43 @@ public class CommandHandler {
 
         Long result = session.createQuery("from ExamResult where id = :id").setParameter("id", examId).stream().count();
         System.out.println("Exam with id " +examId + " taken " + result + " times");
+    }
+
+    public static void calcExamAvgScore(Scanner sc){
+        SessionFactory sessionFactory = SessionFactoryMaker.getFactory();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        System.out.println("Enter ID of Exam which you want to see average score: ");
+        int examId = parseInt(sc.nextLine());
+
+        String  result = session.createQuery("from ExamResult where id = :id").setParameter("id", examId).getParameterValue("result").toString();
+        String  noQuestions= session.createQuery("from ExamResult where id = :id").setParameter("id", examId).getParameterValue("noQuestions").toString();
+
+
+        System.out.println("Exam with id " +examId + " taken " + result + " times");
+        // Don't have time to finish this but should be easy
+    }
+
+    public static void calcSelectedCount(Scanner sc){
+        //calulate how many times each answer selected
+        SessionFactory sessionFactory = SessionFactoryMaker.getFactory();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        System.out.println("Enter ID of Exam which you want to see average score: ");
+        int examId = parseInt(sc.nextLine());
+        Exam e = (Exam) session.createQuery("from Exam where id = :id").setParameter("id", examId).uniqueResult();
+
+        Query qry=session.createQuery("select e.aSelected, e.bSelected, e.cSelected from ExamResult e where e.exam=:p1");
+        qry.setParameter("p1",e);
+        List l2=qry.list();
+        Iterator itr=l2.iterator();
+        while(itr.hasNext()){
+            Object a[]=(Object[])itr.next();
+            System.out.println("A selected: "+ a[0]+" B selected: " + a[1]+" C slected: " + a[2]);
+        }
+3
+        // Don't have time to finish this but should be easy
     }
 }
