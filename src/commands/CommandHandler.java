@@ -96,9 +96,9 @@ public class CommandHandler {
         exam3_students.add(student2);
 
 
-        exam1.setStudents(exam1_students);
-        exam2.setStudents(exam2_students);
-        exam3.setStudents(exam3_students);
+//        exam1.setStudents(exam1_students);
+//        exam2.setStudents(exam2_students);
+//        exam3.setStudents(exam3_students);
 
         session.persist(exam1);
         session.persist(exam2);

@@ -1,6 +1,7 @@
 package config;
 
 import entities.Exam;
+import entities.ExamResult;
 import entities.Question;
 import entities.Student;
 import org.hibernate.SessionFactory;
@@ -14,6 +15,7 @@ public class SessionFactoryMaker {
                     .addAnnotatedClass(Exam.class)
                     .addAnnotatedClass(Question.class)
                     .addAnnotatedClass(Student.class)
+                    .addAnnotatedClass(ExamResult.class)
                     .configure()
                     .buildSessionFactory();
         } catch (Throwable ex) {

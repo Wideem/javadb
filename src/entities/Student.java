@@ -14,13 +14,13 @@ public class Student {
     @Column(name = "name",  nullable = false)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "student_exam",
-            joinColumns = {@JoinColumn(name = "student_id")},
-            inverseJoinColumns = {@JoinColumn(name = "exam_id")}
-    )
-    private List<Exam> exams;
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "student_exam",
+//            joinColumns = {@JoinColumn(name = "student_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "exam_id")}
+//    )
+//    private List<Exam> exams;
 
     public Student() {
     }
@@ -37,13 +37,13 @@ public class Student {
         return name;
     }
 
-    public List<Exam> getExams() {
-        return exams;
-    }
-
-    public void setExams(List<Exam> exams) {
-        this.exams = exams;
-    }
+//    public List<Exam> getExams() {
+//        return exams;
+//    }
+//
+//    public void setExams(List<Exam> exams) {
+//        this.exams = exams;
+//    }
 
     public void setName(String name) {
         this.name = name;
