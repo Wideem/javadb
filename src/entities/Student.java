@@ -2,6 +2,8 @@ package entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "student")
 public class Student {
@@ -11,6 +13,14 @@ public class Student {
 
     @Column(name = "name",  nullable = false)
     private String name;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "student_exam",
+            joinColumns = {@JoinColumn(name = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "exam_id")}
+    )
+    private List<Exam> exams;
 
     public Student() {
     }
@@ -25,6 +35,14 @@ public class Student {
 
     public String getName() {
         return name;
+    }
+
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
     }
 
     public void setName(String name) {

@@ -1,3 +1,5 @@
+package config;
+
 import entities.Exam;
 import entities.Question;
 import entities.Student;

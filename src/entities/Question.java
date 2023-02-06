@@ -1,6 +1,13 @@
 package entities;
 
 import jakarta.persistence.*;
+import org.hibernate.Session;
+
+import java.util.Scanner;
+
+import config.SessionFactoryMaker;
+
+import static java.lang.Integer.parseInt;
 
 @Entity
 @Table(name = "question")
@@ -26,6 +33,22 @@ public class Question {
     private int answerId;
 
     public Question() {
+    }
+
+    public Question(Scanner sc) {
+        System.out.println("Enter question:");
+        this.question = sc.nextLine();
+        System.out.println("Enter Answer A:");
+        this.answerA = sc.nextLine();
+        System.out.println("Enter Answer B:");
+        this.answerB = sc.nextLine();
+        System.out.println("Enter Answer C:");
+        this.answerC = sc.nextLine();
+        System.out.println("Enter ID of correct answer:");
+        this.answerId = parseInt(sc.nextLine());
+        System.out.println("Enter exam_id:");
+        int examId = parseInt(sc.nextLine());
+        this.exam = new Exam(id=examId);
     }
 
     public int getId() {
@@ -64,7 +87,35 @@ public class Question {
         return answerId;
     }
 
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public Exam getExam() {
+        return exam;
+    }
+
+    public void setExam(Exam exam) {
+        this.exam = exam;
+    }
+
     public void setAnswerId(int answerId) {
         this.answerId = answerId;
     }
+
+    public static void add(Scanner sc) {
+        System.out.println("Adding a new question");
+        Question q = new Question(sc);
+        try (Session session = SessionFactoryMaker.getFactory().openSession()) {
+            session.getTransaction().begin();
+            session.persist(q);
+            session.getTransaction().commit();
+        }
+    }
 }
+
+

@@ -17,8 +17,15 @@ public class Exam {
     @OneToMany(mappedBy = "exam",cascade = CascadeType.ALL, fetch = FetchType.EAGER )
     private List<Question> questions;
 
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "exams", fetch = FetchType.EAGER)
+    private List<Student> students;
+
 
     public Exam() {
+    }
+
+    public Exam(int id) {
+        this.id = id;
     }
 
     public int getId() {
@@ -39,6 +46,14 @@ public class Exam {
 
     public List<Question> getQuestions() {
         return questions;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     public void setQuestions(List<Question> questions) {
