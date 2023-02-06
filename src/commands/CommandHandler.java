@@ -225,7 +225,6 @@ public class CommandHandler {
             Object a[]=(Object[])itr.next();
             System.out.println("A selected: "+ a[0]+" B selected: " + a[1]+" C slected: " + a[2]);
         }
-3
         // Don't have time to finish this but should be easy
     }
 }
