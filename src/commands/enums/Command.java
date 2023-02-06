@@ -3,9 +3,8 @@ package commands.enums;
 public enum Command {
 
     ADD_NEW("1", "Add new question"),
-    SHOW("2", "Show data"),
-    DELETE("3", "Fill data(first time use)"),
-    UPDATE("4", "Take exam"),
+    EXAM("2", "Take exam"),
+    FILL("3", "Fill data(first time use)"),
 
     EXIT("0", "Exit");
 
