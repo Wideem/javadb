@@ -5,6 +5,7 @@ public enum Command {
     ADD_NEW("1", "Add new question"),
     EXAM("2", "Take exam"),
     FILL("3", "Fill data(first time use)"),
+    UPDATE("4", "Update question"),
 
     EXIT("0", "Exit");
 

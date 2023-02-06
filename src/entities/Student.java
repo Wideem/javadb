@@ -48,4 +48,9 @@ public class Student {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return String.format("|%3s|%15s|", this.getId(), this.getName());
+    }
 }

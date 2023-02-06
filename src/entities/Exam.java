@@ -59,4 +59,9 @@ public class Exam {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
+
+    @Override
+    public String toString() {
+        return String.format("|%15s|%15s|", this.getId(), this.getName());
+    }
 }

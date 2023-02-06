@@ -26,9 +26,10 @@ public class Main {
                 CommandHandler.printCommands();
                 String input = sc.nextLine();
                 switch (input) {
-                    case "1" -> Question.add(sc);
+                    case "1" -> Question.create(sc);
                     case "2" -> CommandHandler.takeExam(sc);
                     case "3" -> CommandHandler.fillDb();
+                    case "4" -> Question.update(sc);
                     case "0" -> runProgram = false;
                     default -> System.out.println("Incorrect input! Try again.");
                 }

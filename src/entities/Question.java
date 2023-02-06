@@ -3,6 +3,7 @@ package entities;
 import jakarta.persistence.*;
 import org.hibernate.Session;
 
+import java.util.List;
 import java.util.Scanner;
 
 import config.SessionFactoryMaker;
@@ -107,7 +108,17 @@ public class Question {
         this.answerId = answerId;
     }
 
-    public static void add(Scanner sc) {
+    public static void showAll() {
+        System.out.println("All questions:");
+        try (Session session = SessionFactoryMaker.getFactory().openSession()) {
+            List<Question> questions = session.createQuery("from Question", Question.class).list();
+            for (Question q : questions) {
+                System.out.println(q);
+            }
+        }
+    }
+
+    public static void create(Scanner sc) {
         System.out.println("Adding a new question");
         Question q = new Question(sc);
         try (Session session = SessionFactoryMaker.getFactory().openSession()) {
@@ -115,6 +126,46 @@ public class Question {
             session.persist(q);
             session.getTransaction().commit();
         }
+    }
+
+    public static void update(Scanner sc) {
+        showAll();
+        System.out.println("Enter ID to update entity:");
+        int id = Integer.parseInt(sc.nextLine());
+        try (Session session = SessionFactoryMaker.getFactory().openSession()) {
+            session.getTransaction().begin();
+            Question questionToUpdate = session.get(Question.class, id);
+            questionToUpdate.printFieldsAvailable();
+            System.out.println("Enter field id to update:");
+            questionToUpdate.updateFieldByFieldId(Integer.parseInt(sc.nextLine()), sc);
+            session.merge(questionToUpdate);
+            session.getTransaction().commit();
+        }
+    }
+
+    private void printFieldsAvailable() {
+        System.out.println("[0] Question: " + this.question);
+        System.out.println("[1] Answer A: " + this.answerA);
+        System.out.println("[2] Answer B: " + this.answerB);
+        System.out.println("[3] Answer C: " + this.answerC);
+        System.out.println("[4] Correct answer index: " + this.answerId);
+        System.out.println("[5] Exam. id: " + this.getExam());
+    }
+
+    private void updateFieldByFieldId(int fieldId, Scanner sc) {
+        switch (fieldId) {
+            case 0 -> this.setQuestion(sc.nextLine());
+            case 1 -> this.setAnswerA(sc.nextLine());
+            case 2 -> this.setAnswerB(sc.nextLine());
+            case 3 -> this.setAnswerC(sc.nextLine());
+            case 4 -> this.setAnswerId(parseInt(sc.nextLine()));
+            default -> System.out.println("Unknown field!");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("|%3s|%15s|%15s|", this.getId(), this.getQuestion(), this.getExam());
     }
 }
 
