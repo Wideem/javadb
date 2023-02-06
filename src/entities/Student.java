@@ -37,13 +37,7 @@ public class Student {
         return name;
     }
 
-//    public List<Exam> getExams() {
-//        return exams;
-//    }
-//
-//    public void setExams(List<Exam> exams) {
-//        this.exams = exams;
-//    }
+//2
 
     public void setName(String name) {
         this.name = name;

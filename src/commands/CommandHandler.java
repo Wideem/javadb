@@ -3,14 +3,18 @@ package commands;
 import commands.enums.Command;
 import config.SessionFactoryMaker;
 import entities.Exam;
+import entities.ExamResult;
 import entities.Question;
 import entities.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+
+import static java.lang.Integer.parseInt;
 
 public class CommandHandler {
 
@@ -109,7 +113,59 @@ public class CommandHandler {
 
     }
 
-    public static void takeExam(Scanner sc){
+    public static void takeExam(Scanner sc) {
+        SessionFactory sessionFactory = SessionFactoryMaker.getFactory();
+        Session session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        System.out.println("Enter Student name");
+        String name = sc.nextLine();
+        int result = 0;
 
+        Student st = (Student) session.createQuery("from Student where name = :name").setParameter("name", name).uniqueResult();
+
+        List<Exam> allExams = session.createQuery("from Exam").list();
+        System.out.println("All exams");
+        for (Exam e : allExams
+        ) {
+            System.out.println(e);
+
+        }
+
+        System.out.println("Enter Exam Id to take:");
+        int examId = parseInt(sc.nextLine());
+
+        Exam e = (Exam) session.createQuery("from Exam where id = :id").setParameter("id", examId).uniqueResult();
+
+
+        List<Question> questions = session.createQuery("from Question where exam.id = :examId", Question.class)
+                .setParameter("examId", e.getId())
+                .list();
+
+        for (Question q : questions) {
+            System.out.println(q.getQuestion());
+            String answerA = q.getAnswerA();
+            String answerB = q.getAnswerB();
+            String answerC = q.getAnswerC();
+            System.out.println("Answers");
+            System.out.println("0- " + answerA);
+            System.out.println("1- " + answerB);
+            System.out.println("2- " + answerC);
+
+            System.out.println("Enter ID of correct Answer: ");
+            int answer = Integer.parseInt(sc.nextLine());
+            if (answer == q.getAnswerId()) {
+                System.out.println("You're correct");
+                result++;
+            }else {
+                System.out.println("sorry you're wrong");
+            }
+
+        }
+        ExamResult results = new ExamResult();
+        results.setExam(e);
+        results.setStudent(st);
+        results.setResult(result);
+        session.persist(results);
+        session.getTransaction().commit();
     }
 }
